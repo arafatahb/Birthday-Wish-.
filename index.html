@@ -1,0 +1,309 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday — Nusrat</title>  <!-- Google Fonts -->  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">  <style>
+    :root{
+      --bg:#0f1724; /* deep navy */
+      --card:#0b1220;
+      --accent: linear-gradient(90deg,#ff7ab6,#7afcff);
+      --glass: rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: 'Poppins', system-ui, sans-serif;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(122,252,255,0.05), transparent),
+                  radial-gradient(900px 400px at 90% 80%, rgba(255,122,182,0.03), transparent),
+                  var(--bg);
+      color:#e6eef8;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+    }
+
+    .card{
+      width:100%;
+      max-width:820px;
+      min-height:520px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:24px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      overflow:hidden;
+      position:relative;
+    }
+
+    header.hero{
+      padding:56px 48px 40px 48px;
+      text-align:center;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    }
+
+    .brand{
+      font-family: 'Playfair Display', serif;
+      font-size:28px;
+      letter-spacing:0.6px;
+      margin-bottom:18px;
+      color: #fff;
+      text-shadow: 0 6px 24px rgba(58,22,75,0.25);
+    }
+
+    .intro-link{
+      display:inline-block;
+      padding:18px 30px;
+      border-radius:999px;
+      font-size:22px;
+      cursor:pointer;
+      background: linear-gradient(90deg,#ff7ab6 0%, #7afcff 100%);
+      color:#081021;
+      font-weight:600;
+      box-shadow: 0 8px 30px rgba(122,122,255,0.08);
+      transform:translateY(0);
+      transition:transform 180ms ease;
+      text-decoration:none;
+    }
+    .intro-link:active{transform:translateY(2px)}
+
+    /* pages container */
+    .pages{
+      padding:48px;
+      min-height:320px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+
+    .page{
+      position:absolute;
+      inset:48px 48px 88px 48px;
+      border-radius:16px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:36px;
+      backface-visibility: hidden;
+      transform-origin:center center;
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .page.visible{
+      opacity:1;
+      pointer-events:auto;
+      animation: floatIn 700ms cubic-bezier(.2,.9,.3,1) both;
+    }
+
+    @keyframes floatIn{
+      from{transform: translateY(18px) scale(.98); opacity:0}
+      to{transform: translateY(0) scale(1); opacity:1}
+    }
+
+    h1.headline{
+      font-family: 'Playfair Display', serif;
+      font-size:48px;
+      margin:6px 0 12px 0;
+      letter-spacing:0.4px;
+      text-align:center;
+      line-height:1.05;
+    }
+
+    p.message{
+      font-size:18px;
+      max-width:720px;
+      text-align:center;
+      color: #dfeeff;
+      margin:12px 0 0 0;
+      font-weight:400;
+      opacity:0.95;
+    }
+
+    .emoji{font-size:44px; display:block; margin-bottom:12px}
+
+    /* stylish decorative underline */
+    .underline{
+      height:6px; width:160px; margin:18px auto 6px; border-radius:999px;
+      background: linear-gradient(90deg,#ff7ab6,#7afcff);
+      filter: drop-shadow(0 6px 24px rgba(122,122,255,0.06));
+    }
+
+    /* fixed next button */
+    .controls{
+      position:absolute;
+      left:0; right:0; bottom:18px;
+      display:flex; justify-content:center; pointer-events:none;
+    }
+    button.next{
+      pointer-events:auto;
+      background:transparent;
+      border:0;
+      padding:14px 28px;
+      border-radius:999px;
+      font-weight:600;
+      cursor:pointer;
+      font-size:16px;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      color:#fff;
+      box-shadow: 0 10px 30px rgba(6,8,18,0.6);
+      transition:transform .18s ease, box-shadow .18s;
+    }
+    button.next:hover{transform:translateY(-4px); box-shadow: 0 18px 40px rgba(6,8,18,0.7)}
+
+    /* small page counter */
+    .counter{position:absolute; left:28px; bottom:24px; font-size:13px; color:rgba(255,255,255,0.55)}
+
+    /* text animation effects */
+    .animate-words{display:inline-block; opacity:0; transform:translateY(8px); animation: riseWords 900ms forwards;}
+    .animate-words.delay{animation-delay:120ms}
+    .animate-words.delay2{animation-delay:260ms}
+    .animate-words.delay3{animation-delay:420ms}
+    @keyframes riseWords{to{opacity:1; transform:translateY(0)}}
+
+    /* responsive */
+    @media (max-width:600px){
+      .card{border-radius:18px}
+      h1.headline{font-size:32px}
+      .intro-link{font-size:18px;padding:14px 22px}
+      .pages{padding:28px}
+      .page{inset:28px 18px 100px 18px}
+    }
+  </style></head>
+<body>
+  <div class="card" role="region" aria-label="Birthday wish card">
+    <header class="hero">
+      <div class="brand">A Small Birthday Surprise</div>
+      <!-- landing link: when clicked, opens page 1 -->
+      <a id="openLink" class="intro-link" href="javascript:void(0)">Open your wish ✨</a>
+    </header><main class="pages">
+  <!-- Page 1 -->
+  <section id="page1" class="page" aria-hidden="true">
+    <div class="emoji animate-words">🎉</div>
+    <h1 class="headline animate-words delay">Happy Birthday, Nusrat!</h1>
+    <div class="underline animate-words delay2"></div>
+    <p class="message animate-words delay3">May your day sparkle with joy and your heart be full of smiles. You mean a lot to those who know your gentle soul.</p>
+  </section>
+
+  <!-- Page 2 -->
+  <section id="page2" class="page" aria-hidden="true">
+    <div class="emoji animate-words">💌</div>
+    <h1 class="headline animate-words delay">To Nusrat —</h1>
+    <p class="message animate-words delay2">I know life has taken us on different paths, but I’ll always wish the best for you. On your special day, I hope you’re surrounded by love, happiness, and all the little things that make your heart smile. You truly deserve a life full of peace, success, and joy. 💖</p>
+  </section>
+
+  <!-- Page 3 -->
+  <section id="page3" class="page" aria-hidden="true">
+    <div class="emoji animate-words">🌟</div>
+    <h1 class="headline animate-words delay">A wish for the year ahead</h1>
+    <div class="underline animate-words delay2"></div>
+    <p class="message animate-words delay3">May this new year of your life open doors to beautiful opportunities, bring you closer to your dreams, and fill your days with endless positivity. No matter what, you’ll always remain someone special in my memories. 🌸</p>
+  </section>
+
+  <!-- Page 4 -->
+  <section id="page4" class="page" aria-hidden="true">
+    <div class="emoji animate-words">✨</div>
+    <h1 class="headline animate-words delay">With warmest wishes</h1>
+    <p class="message animate-words delay2">Wishing you nothing but happiness today and always. 💫</p>
+  </section>
+
+  <div class="controls">
+    <div class="counter" id="counter">0 / 0</div>
+    <button class="next" id="nextBtn">Next →</button>
+  </div>
+</main>
+
+  </div>  <script>
+    (function(){
+      const pages = Array.from(document.querySelectorAll('.page'));
+      const openLink = document.getElementById('openLink');
+      const nextBtn = document.getElementById('nextBtn');
+      const counter = document.getElementById('counter');
+      let idx = -1; // no page visible yet
+
+      function updateCounter(){
+        counter.textContent = (idx+1) + ' / ' + pages.length;
+      }
+
+      function showPage(i){
+        pages.forEach((p,pi)=>{
+          if(pi===i){
+            p.classList.add('visible');
+            p.setAttribute('aria-hidden','false');
+            // restart child animations by forcing reflow then re-adding classes
+            const anims = p.querySelectorAll('.animate-words');
+            anims.forEach(el=>{ el.style.animation = 'none'; el.offsetHeight; el.style.animation = ''; });
+          } else {
+            p.classList.remove('visible');
+            p.setAttribute('aria-hidden','true');
+          }
+        });
+        idx = i;
+        updateCounter();
+        // if last page, change button text to 'Close' or 'Done'
+        if(idx >= pages.length-1){ nextBtn.textContent = 'Done ✨'; }
+        else { nextBtn.textContent = 'Next →'; }
+      }
+
+      openLink.addEventListener('click', ()=>{
+        showPage(0);
+      });
+
+      nextBtn.addEventListener('click', ()=>{
+        if(idx === -1) { showPage(0); return }
+        if(idx < pages.length-1){ showPage(idx+1); }
+        else { 
+          // finished: provide gentle final interaction
+          nextBtn.disabled = true;
+          nextBtn.style.opacity = '0.75';
+          nextBtn.textContent = 'Sent ❤️';
+          // small confetti effect (simple)
+          burst();
+        }
+      });
+
+      // keyboard support
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'ArrowRight' || e.key === 'Enter') nextBtn.click();
+      });
+
+      // small confetti using DOM elements
+      function burst(){
+        const container = document.createElement('div');
+        container.style.position='fixed'; container.style.left=0; container.style.top=0; container.style.width='100%'; container.style.height='100%'; container.style.pointerEvents='none';
+        document.body.appendChild(container);
+        const colors = ['#ff7ab6','#7afcff','#ffd86b','#a1ff9b','#c8a1ff'];
+        for(let i=0;i<28;i++){
+          const el = document.createElement('div');
+          el.style.position='absolute';
+          el.style.width='10px'; el.style.height='14px'; el.style.borderRadius='3px';
+          el.style.background = colors[i%colors.length];
+          el.style.left = (50 + (Math.random()-0.5)*60) + '%';
+          el.style.top = (40 + (Math.random()-0.5)*20) + '%';
+          el.style.opacity='0.95';
+          el.style.transform = 'translateY(0) rotate('+(Math.random()*360)+'deg)';
+          container.appendChild(el);
+          const x = (Math.random()-0.5)*1200; const y = - (200 + Math.random()*800);
+          el.animate([
+            {transform: 'translate3d(0,0,0) rotate(0deg)', opacity:1},
+            {transform: `translate3d(${x}px, ${y}px, 0) rotate(360deg)`, opacity:0}
+          ], {duration: 1200 + Math.random()*800, easing:'cubic-bezier(.2,.9,.3,1)'});
+          setTimeout(()=>el.remove(), 2200);
+        }
+        setTimeout(()=>container.remove(), 2600);
+      }
+
+      // initialize counter
+      updateCounter();
+
+      // Accessibility note: ensure the first interactive element is focusable
+      openLink.setAttribute('role','button');
+      openLink.setAttribute('aria-label','Open birthday wish');
+
+    })();
+  </script></body>
+</html>
